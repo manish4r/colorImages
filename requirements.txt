@@ -1,6 +1,8 @@
 deoldify
 fastai
-torch
+torch==2.2.0
 torchvision
 gradio
 requests
+numpy<2.0.0
+

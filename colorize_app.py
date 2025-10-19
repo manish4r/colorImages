@@ -66,7 +66,7 @@ except Exception as e:
     exit() # Exit if we can't load the model
 
 # --- 4. Define the Interface Function ---
-def colorize_from_url(image_url, render_factor, watermarked, compare_view):
+def colorize_from_url(image_url, render_factor, watermarked):
     """
     This function will be called by the Gradio interface.
     It takes the inputs from the UI, runs the colorizer,
@@ -82,7 +82,7 @@ def colorize_from_url(image_url, render_factor, watermarked, compare_view):
         image_path = colorizer.plot_transformed_image_from_url(
         url=image_url,
         render_factor=int(render_factor), # Ensure render_factor is int
-        compare=compare_view,
+        # compare=compare_view,
         watermarked=watermarked
         )
         # Return the path to the generated image
@@ -102,13 +102,13 @@ default_watermarked = True
 
 # Build the interface
 iface = gr.Interface(
-    allow_flagging="never",  # This removes the Flag button
+    flagging_mode="never",  # This removes the Flag button
     fn=colorize_from_url,
     inputs=[
         gr.Textbox(label="Image URL", value=default_url),
         gr.Slider(minimum=5, maximum=40, value=default_render, step=1, label="Render Factor"),
         gr.Checkbox(value=default_watermarked, label="Add DeOldify Watermark"),
-        gr.Checkbox(value=True, label="Show Before/After Comparison")
+        # gr.Checkbox(value=True, label="Show Before/After Comparison")
     ],
     outputs=[
         gr.Image(type="filepath", label="Original Image"),
