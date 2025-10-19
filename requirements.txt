@@ -1,0 +1,6 @@
+deoldify
+fastai
+torch
+torchvision
+gradio
+requests
